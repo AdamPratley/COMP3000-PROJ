@@ -20,7 +20,7 @@ logger = logging.getLogger("pc")
 pcs = set()
 relay = MediaRelay()
 
-conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\adamp\Desktop\server\DB.accdb;')
+conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\adamp\Desktop\COMP3000 PROJ\COMP3000-PROJ\DB.accdb;')
 cursor = conn.cursor()
 
 class VideoTransformTrack(MediaStreamTrack):
@@ -57,6 +57,9 @@ async def javascript(request):
     content = open(os.path.join(ROOT, "client.js"), "r").read()
     return web.Response(content_type="application/javascript", text=content)
 
+async def stylesheet(request):
+    content = open(os.path.join(ROOT, "style.css"), "r").read()
+    return web.Response(content_type="text/css", text=content)
 
 async def offer(request):
     params = await request.json()
@@ -167,6 +170,7 @@ if __name__ == "__main__":
     app.on_shutdown.append(on_shutdown)
     app.router.add_get("/", index)
     app.router.add_get("/client.js", javascript)
+    app.router.add_get("/style.css", stylesheet)
     app.router.add_post("/offer", offer)
     web.run_app(
         app, access_log=None, host=args.host, port=args.port, ssl_context=ssl_context
