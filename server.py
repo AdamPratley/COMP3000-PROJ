@@ -26,10 +26,9 @@ class VideoTransformTrack(MediaStreamTrack):
     
     kind = "video"
 
-    def __init__(self, track, bitrate):
-        super().__init__()  # don't forget this!
+    def __init__(self, track):
+        super().__init__()
         self.track = track
-        self.bitrate = bitrate
 
     async def recv(self):
         frame = await self.track.recv()
@@ -93,8 +92,8 @@ async def offer(request):
         elif track.kind == "video":
             pc.addTrack(
                 VideoTransformTrack(
-                    relay.subscribe(track), bitrate=params["bit_rate"]
-                )
+                    relay.subscribe(track)
+                    )
             )
             if args.record_to:
                 recorder.addTrack(relay.subscribe(track))

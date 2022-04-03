@@ -46,8 +46,7 @@ function negotiate() {
         return fetch('/offer', {
             body: JSON.stringify({
                 sdp: offer.sdp,
-                type: offer.type,
-                bit_rate: document.getElementById('bit_rate').value
+                type: offer.type
             }),
             headers: {
                 'Content-Type': 'application/json'
