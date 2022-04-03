@@ -5,7 +5,6 @@ import logging
 import os
 import ssl
 import uuid
-import pyodbc
 
 import cv2
 from aiohttp import web
@@ -20,8 +19,6 @@ logger = logging.getLogger("pc")
 pcs = set()
 relay = MediaRelay()
 
-conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\adamp\Desktop\COMP3000 PROJ\COMP3000-PROJ\DB.accdb;')
-cursor = conn.cursor()
 
 class VideoTransformTrack(MediaStreamTrack):
     """
@@ -37,14 +34,6 @@ class VideoTransformTrack(MediaStreamTrack):
 
     async def recv(self):
         frame = await self.track.recv()
-
-        
-        
-        #print(self.bitrate)
-        #cursor.execute('select BITRATE from br_table WHERE UUID = 1242')
-   
-        #for row in cursor.fetchall():
-            #print (row)
         return frame
 
 
