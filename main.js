@@ -8,7 +8,6 @@ force_resbtn = document.getElementById("force_res");
 select = document.getElementById("av_resolutions");
 address_input = document.getElementById("adr_input");
 
-//var url = address_input.value;
 var player = dashjs.MediaPlayer().create();
 
 brslider.addEventListener('change', function(){
@@ -37,21 +36,83 @@ function clear_select () {
 loadbtn.addEventListener('click', function(){
     clear_select();
     player.initialize(document.querySelector("#videoPlayer"), address_input.value, true);
+    clearInterval(statsInterval);
+    statsInterval = null;
 
-    setInterval(function() {
-        // get current quality index 
-        var currentQualityIndex = player.getQualityFor('video');
-    
-        // playervar.getBitrateInfoListFor('video') -- returns array of all qualities
-        var currentQualityObject = player.getBitrateInfoListFor('video')[currentQualityIndex];
-
-        var bitrate = currentQualityObject.bitrate;
-        var resolution = currentQualityObject.width +"*"+ currentQualityObject.height; 
-        console.log(currentQualityObject);
-        cur_br.innerHTML = ("Current Video Bitrate: " + (bitrate / 1000) + " kbps");
-        cur_res.innerHTML = ("Current Resolution: " + resolution);
-    },1000);
 });
+
+var xValues = [];
+var greenY = [];
+var blueY = [];
+
+var achart = new Chart("myChart", {
+    type: "line",
+    data: {
+      labels: xValues,
+      datasets: [{ 
+        data: greenY,
+        borderColor: "green",
+        fill: false,
+        label: "Bit Rate"
+      }, { 
+        data: blueY,
+        borderColor: "blue",
+        fill: false,
+        label: "Resolution (Height)"
+      }]
+    },
+    options: {
+      legend: {display: true},
+      scales:{
+        xAxes: [{
+            display: true,
+            scaleLabel: {
+                display: true,
+                labelString: 'Time (Seconds)'
+            },
+            ticks: {
+                display: false 
+            }
+        }],
+        yAxes: [{
+            display: true, 
+            scaleLabel: {
+                display: true,
+                labelString: 'Bit Rate (Kbps)'
+            }
+        }]
+    }
+    }
+}); 
+
+var statsInterval;
+var ispaused;
+
+function start_tracking (){
+    if (!statsInterval && !ispaused){
+        statsInterval = setInterval(function() {
+             
+            var currentQualityIndex = player.getQualityFor('video');
+        
+            
+            var currentQualityObject = player.getBitrateInfoListFor('video')[currentQualityIndex];
+    
+            var bitrate = currentQualityObject.bitrate;
+            var resolution = currentQualityObject.width +"*"+ currentQualityObject.height; 
+            
+            var curBitrate = bitrate / 1000;
+            cur_br.innerHTML = ("Current Video Bitrate: " + curBitrate + " kbps");
+            cur_res.innerHTML = ("Current Resolution: " + resolution);
+            
+            
+            xValues.push(parseInt(player.time()));
+            greenY.push(curBitrate);
+            blueY.push(currentQualityObject.height);
+
+            achart.update();
+        },1000);
+    }
+}
 
 player.on("streamInitialized", function () {
     var bitrates = player.getBitrateInfoListFor("video");
@@ -62,6 +123,16 @@ player.on("streamInitialized", function () {
         option.value = i;
         select.add(option, 0);
     }
+});
+
+player.on("playbackPaused", function(){
+    ispaused = true;
+    clearInterval(statsInterval);
+    statsInterval = null;
+});
+player.on("playbackPlaying", function(){
+    ispaused = false;
+    start_tracking();
 });
 
 force_resbtn.addEventListener('click', function(){

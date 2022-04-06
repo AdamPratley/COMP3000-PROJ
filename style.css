@@ -36,5 +36,12 @@ video {
 }
 .media{
     margin-top: 5px;
+    width:100%;
     max-width: 720px;
+}
+
+#myChart{
+    width:100%;
+    max-width:720px;
+    margin-bottom: 25px;
 }
