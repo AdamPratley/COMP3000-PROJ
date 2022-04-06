@@ -1,0 +1,46 @@
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebRTC demo</title>
+</head>
+<body>
+
+<div id="navbar" class="topnav">
+    <h1 class="Header"> Video Tester </h1>
+</div>
+<div class="subheading">
+    <h2>Options</h2>
+</div>
+
+<div class="content">
+    
+    <div class="option">
+        <label for="video-resolution">Resolution:</label>
+        <select id="video-resolution">
+            <option value="" selected>Default resolution</option>
+            <option value="320x240">320x240</option>
+            <option value="640x480">640x480</option>
+            <option value="960x540">960x540</option>
+            <option value="1280x720">1280x720</option>
+            <option value="1920x1080">1920x1080</option>
+        </select>
+        <br>
+    <label for="bit_rate">Bit Rate:</label>
+    <input type="range" min="1" max="100" value="50" class="slider" id="bit_rate">
+    </div>
+
+    <button id="start" onclick="start()">Start</button>
+    <button id="stop" style="display: none" onclick="stop()">Stop</button>
+
+    <div id="media" style="display: none">
+        <h2>Media</h2>
+
+        <audio id="audio" autoplay="true"></audio>
+        <video id="video" autoplay="true" playsinline="true"></video>
+    </div>
+</div>
+<script src="client.js"></script>
+</body>
+</html>

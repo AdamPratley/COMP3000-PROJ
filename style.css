@@ -1,5 +1,24 @@
-button {
-    padding: 8px 16px;
+body{
+    margin: 0px;
+}
+.content{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.topnav{
+    background-color: darkslategray;
+    color: white;
+}
+.Header{
+    padding: 1px;
+    padding-left: 5px;
+}
+.subheading{
+    margin: auto;
+    width: 50%;
+    text-align: center;
 }
 
 pre {
@@ -7,45 +26,15 @@ pre {
     overflow-y: auto;
 }
 
+button {
+    padding: 8px 16px;
+}
+
 video {
     width: 100%;
-}
-
-.option {
-    margin-bottom: 8px;
-}
-
-#media {
-    max-width: 1280px;
-}
-
-.topnav{
-    background-color: darkslategray;
-    color: white;
-}
-
-body{
-    margin: 0px;
-}
-
-.Header{
-    padding: 1px;
-    padding-left: 5px;
-}
-
-.content{
     margin: auto;
-    width: 50%;
-    text-align: center;
 }
-
-.subheading{
-    margin: auto;
-    width: 50%;
-    text-align: center;
+.media{
+    margin-top: 5px;
+    max-width: 720px;
 }
-
-.slider{
-    height:8px;
-}
-
