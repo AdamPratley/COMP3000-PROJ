@@ -36,9 +36,6 @@ function clear_select () {
 loadbtn.addEventListener('click', function(){
     clear_select();
     player.initialize(document.querySelector("#videoPlayer"), address_input.value, true);
-    clearInterval(statsInterval);
-    statsInterval = null;
-
 });
 
 var xValues = [];
@@ -114,12 +111,13 @@ function start_tracking (){
     }
 }
 
+var bitrates;
 player.on("streamInitialized", function () {
-    var bitrates = player.getBitrateInfoListFor("video");
+    bitrates = player.getBitrateInfoListFor("video");
     
     for (let i = 0; i < bitrates.length; i++){
         var option = document.createElement('option');
-        option.text =  bitrates[i].height;
+        option.text =  bitrates[i].height + " ("+ bitrates[i].bitrate / 1000 +" Kbps)";
         option.value = i;
         select.add(option, 0);
     }
@@ -140,7 +138,7 @@ force_resbtn.addEventListener('click', function(){
 
     if (select.value == "Auto"){
         settingsp.streaming.abr.autoSwitchBitrate = true;
-        player.setQualityFor('video', 8);
+        player.setQualityFor('video', bitrates.length-1);
     } else {
         settingsp.streaming.abr.autoSwitchBitrate = false;
         player.setQualityFor('video', select.value);
