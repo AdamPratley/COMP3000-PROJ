@@ -10,7 +10,7 @@ address_input = document.getElementById("adr_input");
 
 var player = dashjs.MediaPlayer().create();
 
-brslider.addEventListener('change', function(){
+function sliderValSet(){
     if (brslider.value == 100){
         brword.innerHTML = "Maximum " + "("+brslider.value+"%)";
     } else if (brslider.value <= 99 && brslider.value >=75){
@@ -22,7 +22,11 @@ brslider.addEventListener('change', function(){
     } else if (brslider.value <= 24 && brslider.value >=0){
         brword.innerHTML = "Very Low " + "("+brslider.value+"%)";
     }
-});
+}
+
+brslider.addEventListener('change', sliderValSet);
+
+
 
 function clear_select () {
     Array.from(select.options).forEach(function(option_element) {
@@ -32,11 +36,13 @@ function clear_select () {
     });
 }
 
-
-loadbtn.addEventListener('click', function(){
+function initVideo(){
     clear_select();
     player.initialize(document.querySelector("#videoPlayer"), address_input.value, true);
-});
+}
+
+
+loadbtn.addEventListener('click', initVideo);
 
 var xValues = [];
 var greenY = [];
@@ -112,28 +118,35 @@ function start_tracking (){
 }
 
 var bitrates;
-player.on("streamInitialized", function () {
+
+function onStart(){
     bitrates = player.getBitrateInfoListFor("video");
     
     for (let i = 0; i < bitrates.length; i++){
         var option = document.createElement('option');
-        option.text =  bitrates[i].height + " ("+ bitrates[i].bitrate / 1000 +" Kbps)";
+        option.text =  bitrates[i].height + "p ("+ bitrates[i].bitrate / 1000 +" Kbps)";
         option.value = i;
         select.add(option, 0);
     }
-});
+}
+player.on("streamInitialized", onStart);
 
-player.on("playbackPaused", function(){
+function onPause(){
     ispaused = true;
     clearInterval(statsInterval);
     statsInterval = null;
-});
-player.on("playbackPlaying", function(){
+}
+
+player.on("playbackPaused", onPause);
+
+function onPlay(){
     ispaused = false;
     start_tracking();
-});
+}
 
-force_resbtn.addEventListener('click', function(){
+player.on("playbackPlaying", onPlay);
+
+function QualitySelect(){
     let settingsp = player.getSettings();
 
     if (select.value == "Auto"){
@@ -143,4 +156,6 @@ force_resbtn.addEventListener('click', function(){
         settingsp.streaming.abr.autoSwitchBitrate = false;
         player.setQualityFor('video', select.value);
     }
-})
+}
+
+force_resbtn.addEventListener('click', QualitySelect);
