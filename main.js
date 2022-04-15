@@ -56,7 +56,7 @@ var achart = new Chart("myChart", {
         data: greenY,
         borderColor: "green",
         fill: false,
-        label: "Bit Rate"
+        label: "Video Bit Rate"
       }, { 
         data: blueY,
         borderColor: "blue",

@@ -9,7 +9,7 @@ body{
 
 .topnav{
     background-color: darkslategray;
-    color: white;
+    color: whitesmoke;
 }
 .Header{
     padding: 1px;
@@ -44,4 +44,14 @@ video {
     width:100%;
     max-width:720px;
     margin-bottom: 25px;
+}
+
+.footer{
+    background-color: darkslategray;
+    height:30px;
+}
+
+.footerp{
+    color:lightgray;
+    padding:5px;
 }
