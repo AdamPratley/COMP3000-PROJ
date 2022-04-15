@@ -1,0 +1,23 @@
+{
+  "name": "comp3000-proj",
+  "version": "1.0.0",
+  "description": "A Web Based Platform to Evaluate Video Streaming Over a Software Defined Network",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamPratley/COMP3000-PROJ.git"
+  },
+  "keywords": [
+    "SDN",
+    "Web"
+  ],
+  "author": "Adam Pratley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AdamPratley/COMP3000-PROJ/issues"
+  },
+  "homepage": "https://github.com/AdamPratley/COMP3000-PROJ#readme"
+}
