@@ -32,9 +32,9 @@ If the following command returns empty
 ~~~
 ~$ echo $DISPLAY
 ~~~
-Then do this (Replace x's with your host IP)
+Then enter this
 ~~~
-~$ export DISPLAY=192.168.x.x:0.0
+~$ export DISPLAY=localhost:10.0
 ~~~
 Starting Mininet Network with 2 Hosts (Replace x's with IP of OpenDayLight VM)
 ~~~
@@ -45,6 +45,13 @@ When Exiting Mininet do;
 mininet> exit
 ~$ sudo mn -c
 ~~~
+###QoS Policies
+Run the qos100.sh script in the switch 's1'
+~~~
+~$ chmod +x qos100.sh
+~$ ./qos100.sh
+~~~
+The qos100.sh script will automatically clean up old QoS Policies on execution, this must be executed on start.
 
 An Ubuntu Server VM with OpenDayLight; <br />
 https://ubuntu.com/download/server <br />
