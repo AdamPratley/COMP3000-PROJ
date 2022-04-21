@@ -10,21 +10,77 @@ address_input = document.getElementById("adr_input");
 
 var player = dashjs.MediaPlayer().create();
 
-function sliderValSet(){
-    if (brslider.value == 100){
-        brword.innerHTML = "Maximum " + "("+brslider.value+"%)";
-    } else if (brslider.value <= 99 && brslider.value >=75){
-        brword.innerHTML = "High " + "("+brslider.value+"%)";
-    } else if (brslider.value <= 74 && brslider.value >=50){
-        brword.innerHTML = "Medium " + "("+brslider.value+"%)";
-    } else if (brslider.value <= 49 && brslider.value >=25){
-        brword.innerHTML = "Low " + "("+brslider.value+"%)";
-    } else if (brslider.value <= 24 && brslider.value >=0){
-        brword.innerHTML = "Very Low " + "("+brslider.value+"%)";
+function sendput(id){
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", "http://192.168.1.136:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/table/0/flow/iperf");
+
+    xhr.setRequestHeader("Authorization", "Basic YWRtaW46YWRtaW4=");
+    xhr.setRequestHeader("Content-Type", "application/xml");
+
+    var data = `<flow xmlns="urn:opendaylight:flow:inventory">
+    <id>iperf</id>
+    <instructions>
+    <instruction>
+    <order>0</order>
+    <apply-actions>
+    <action>
+    <order>1</order>
+    <output-action>
+        <output-node-connector>NORMAL</output-node-connector>
+        <max-length>65535</max-length>
+    </output-action>
+    </action>
+    <action>
+    <order>0</order>
+    <set-queue-action>
+        <queue-id>${id}</queue-id>
+    </set-queue-action>
+    </action>
+    </apply-actions>
+    </instruction>
+    </instructions>
+    <barrier>true</barrier>
+    <flow-name>iperf</flow-name>
+    <match>
+    <ethernet-match>
+                <ethernet-type>
+                    <type>2048</type>
+                </ethernet-type>
+            </ethernet-match>
+            <ipv4-source>10.0.0.2/32</ipv4-source>
+            <ipv4-destination>10.0.0.1/32</ipv4-destination>
+            <ip-match>
+                <ip-protocol>6</ip-protocol>         
+            </ip-match>
+            <tcp-destination-port>12345</tcp-destination-port>
+    </match>
+    <hard-timeout>0</hard-timeout>
+    <priority>32768</priority>
+    <table_id>0</table_id>
+    <idle-timeout>0</idle-timeout>
+    </flow>`;
+
+    xhr.send(data);
+}
+
+function sliderValSet(val){
+    if (val == 100){
+        brword.innerHTML = "Maximum " + "("+val+"%)";
+    } else if (val <= 99 && val >=75){
+        brword.innerHTML = "High " + "("+val+"%)";
+    } else if (val <= 74 && val >=50){
+        brword.innerHTML = "Medium " + "("+val+"%)";
+    } else if (val <= 49 && val >=25){
+        brword.innerHTML = "Low " + "("+val+"%)";
+    } else if (val <= 24 && val >=0){
+        brword.innerHTML = "Very Low " + "("+val+"%)";
     }
 }
 
-brslider.addEventListener('change', sliderValSet);
+brslider.addEventListener('change', () => {
+    sliderValSet(brslider.value);
+    sendput(brslider.value);
+});
 
 
 
