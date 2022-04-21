@@ -38,7 +38,7 @@ Then do this (Replace x's with your host IP)
 ~~~
 Starting Mininet Network with 2 Hosts (Replace x's with IP of OpenDayLight VM)
 ~~~
-~$ sudo mn -x --mac --nat --topo single,2 --controller=remote,ip=192.168.xx.xx,port=6633 --switch ovsk,protocols=OpenFlow13
+~$ sudo mn -x --mac --nat --topo single,2 --controller=remote,ip=192.168.xx.xx,port=6633
 ~~~
 When Exiting Mininet do;
 ~~~
