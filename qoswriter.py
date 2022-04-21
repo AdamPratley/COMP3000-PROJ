@@ -6,7 +6,7 @@ queueconf = ""
 def makeque(i,rate):    
     return (" -- --id=@q"+str(i)+" create queue other-config:min-rate="+str(rate)+" other-config:max-rate="+str(rate))
 
-baserate = 100000 #kbps
+baserate = 100000 #bps
 
 for i in range(1,101):
     if i == 100:
@@ -18,6 +18,8 @@ for i in range(1,101):
 final = strt + ques + queueconf
 
 with open('qos100.txt', 'w') as f:
+    f.write("sudo ovs-vsctl --all destroy qos")
+    f.write("sudo ovs-vsctl --all destroy queue")
     f.write(final)
     f.close()
 
