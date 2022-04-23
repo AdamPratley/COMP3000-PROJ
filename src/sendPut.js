@@ -1,13 +1,13 @@
 function sendPut(id){
     var xhr = new XMLHttpRequest();
-    var url = "http://"+odlAddr+":8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/table/0/flow/iperf";
+    var url = "http://"+odlAddr+":8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/table/0/flow/brselect";
     xhr.open("PUT", url);
 
     xhr.setRequestHeader("Authorization", "Basic YWRtaW46YWRtaW4=");
     xhr.setRequestHeader("Content-Type", "application/xml");
 
     var data = `<flow xmlns="urn:opendaylight:flow:inventory">
-    <id>iperf</id>
+    <id>brselect</id>
     <instructions>
     <instruction>
     <order>0</order>
@@ -29,7 +29,7 @@ function sendPut(id){
     </instruction>
     </instructions>
     <barrier>true</barrier>
-    <flow-name>iperf</flow-name>
+    <flow-name>brselect</flow-name>
     <match>
     <ethernet-match>
                 <ethernet-type>
