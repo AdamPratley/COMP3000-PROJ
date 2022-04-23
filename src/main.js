@@ -8,7 +8,7 @@ vid_url = document.getElementById("adr_input").value;
 odlAddr = document.getElementById("odl_input").value;
 forceQuality = document.getElementById("force_res");
 select = document.getElementById("av_resolutions");
-
+videoplayer = document.querySelector("#videoPlayer");
 
 
 //Variables
@@ -72,7 +72,10 @@ brslider.addEventListener('change', () => {
     sendPut(brslider.value);
 });
 
-loadbtn.addEventListener('click', initVideo);
+loadbtn.addEventListener('click', function (){
+  clearSelect(select);
+  initVideo(player,videoplayer,vid_url);
+});
 
 player.on("streamInitialized", onStart);
 player.on("playbackPaused", onPause);
