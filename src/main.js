@@ -77,9 +77,22 @@ loadbtn.addEventListener('click', function (){
   initVideo(player,videoplayer,vid_url);
 });
 
-player.on("streamInitialized", onStart);
-player.on("playbackPaused", onPause);
-player.on("playbackPlaying", onPlay);
+player.on("streamInitialized", function(){
+  onStart(bitrates,player,select);
+});
+
+player.on("playbackPaused", function(){
+    clearInterval(statsInterval);
+    statsInterval = null;
+});
+
+player.on("playbackPlaying", function(){
+  if (!statsInterval){
+    statsInterval = setInterval(function() {
+      tracking(player,cur_br,cur_res,brslider,xValues,greenY,blueY,redY,dataChart);
+    },1000);
+  }
+});
 
 forceQuality.addEventListener('click', function(){
   qualitySelect(player,settingsp,select,bitrates);

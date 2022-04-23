@@ -1,4 +1,4 @@
-function onStart(){
+function onStart(bitrates,player,select){
     bitrates = player.getBitrateInfoListFor("video");
     
     for (let i = 0; i < bitrates.length; i++){
@@ -8,3 +8,5 @@ function onStart(){
         select.add(option, 0);
     }
 }
+
+module.exports = onStart;
