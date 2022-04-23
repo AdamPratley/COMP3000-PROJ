@@ -4,7 +4,7 @@
   "description": "A Web Based Platform to Evaluate Video Streaming Over a Software Defined Network",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/AdamPratley/COMP3000-PROJ#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "jest": "^27.5.1"
   }
 }
