@@ -1,5 +1,6 @@
-function sendPut(id){
+function sendPut(id,odlAddr){
     var xhr = new XMLHttpRequest();
+
     var url = "http://"+odlAddr+":8181/restconf/config/opendaylight-inventory:nodes/node/openflow:1/table/0/flow/brselect";
     xhr.open("PUT", url);
 
@@ -51,3 +52,5 @@ function sendPut(id){
 
     xhr.send(data);
 }
+
+module.exports = sendPut;

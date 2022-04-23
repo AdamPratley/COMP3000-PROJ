@@ -4,13 +4,20 @@ brWord = document.getElementById("br_word");
 loadbtn = document.getElementById("load_video");
 cur_br = document.getElementById("cur_bitrate");
 cur_res = document.getElementById("cur_resolution");
-vid_url = document.getElementById("adr_input").value;
-odlAddr = document.getElementById("odl_input").value;
+adrInput = document.getElementById("adr_input");
+odlInput = document.getElementById("odl_input");
 forceQuality = document.getElementById("force_res");
 select = document.getElementById("av_resolutions");
 videoplayer = document.querySelector("#videoPlayer");
 
-
+var vid_url = adrInput.value;
+var odlAddr = odlInput.value;
+adrInput.addEventListener('change', () => {
+  vid_url = adrInput.value;
+})
+odlInput.addEventListener('change', () => {
+  odlAddr = odlInput.value;
+})
 //Variables
 var bitrates, statsInterval;
 var player = dashjs.MediaPlayer().create();
@@ -69,7 +76,7 @@ var dataChart = new Chart("dataChart", {
 //Event Listeners
 brslider.addEventListener('change', () => {
     sliderValSet(brWord,brslider.value);
-    sendPut(brslider.value);
+    sendPut(brslider.value,odlAddr);
 });
 
 loadbtn.addEventListener('click', function (){
