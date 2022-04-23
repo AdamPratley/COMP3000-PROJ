@@ -1,6 +1,6 @@
 //HTML Elements
 brslider = document.getElementById("bit_rate");
-brword = document.getElementById("br_word");
+brWord = document.getElementById("br_word");
 loadbtn = document.getElementById("load_video");
 cur_br = document.getElementById("cur_bitrate");
 cur_res = document.getElementById("cur_resolution");
@@ -8,12 +8,13 @@ vid_url = document.getElementById("adr_input").value;
 odlAddr = document.getElementById("odl_input").value;
 forceQuality = document.getElementById("force_res");
 select = document.getElementById("av_resolutions");
-//address_input = document.getElementById("adr_input");
+
+
 
 //Variables
-
 var bitrates, statsInterval;
 var player = dashjs.MediaPlayer().create();
+let settingsp = player.getSettings();
 
 var xValues = [];
 var greenY = [];
@@ -67,7 +68,7 @@ var dataChart = new Chart("dataChart", {
 
 //Event Listeners
 brslider.addEventListener('change', () => {
-    sliderValSet(brslider.value);
+    sliderValSet(brWord,brslider.value);
     sendPut(brslider.value);
 });
 
@@ -77,4 +78,6 @@ player.on("streamInitialized", onStart);
 player.on("playbackPaused", onPause);
 player.on("playbackPlaying", onPlay);
 
-forceQuality.addEventListener('click', qualitySelect);
+forceQuality.addEventListener('click', function(){
+  qualitySelect(player,settingsp,select,bitrates);
+});

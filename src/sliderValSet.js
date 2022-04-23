@@ -1,4 +1,4 @@
-function sliderValSet(val){
+function sliderValSet(brword,val){
     if (val == 100){
         brword.innerHTML = "Maximum " + "("+val+"%)";
     } else if (val <= 99 && val >=75){
@@ -11,3 +11,5 @@ function sliderValSet(val){
         brword.innerHTML = "Very Low " + "("+val+"%)";
     }
 }
+
+module.exports = sliderValSet;

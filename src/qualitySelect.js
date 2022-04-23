@@ -1,6 +1,4 @@
-function qualitySelect(){
-    let settingsp = player.getSettings();
-
+function qualitySelect(player,settingsp,select,bitrates){
     if (select.value == "Auto"){
         settingsp.streaming.abr.autoSwitchBitrate = true;
         player.setQualityFor('video', bitrates.length-1);
@@ -9,3 +7,5 @@ function qualitySelect(){
         player.setQualityFor('video', select.value);
     }
 }
+
+module.exports = qualitySelect;
