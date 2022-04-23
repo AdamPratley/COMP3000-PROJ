@@ -15,7 +15,10 @@
         <div class="content">
             
             <div class="options">
-                <label for="adr_input">MPD address:</label>
+                <label for="odl_input">ODL Address:</label>
+                <input id="odl_input" value="192.168.1.147" placeholder="192.168.1.000"></input>
+                <br>
+                <label for="adr_input">MPD Address:</label>
                 <input id="adr_input" value="https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd" placeholder="10.0.0.1/video.mpd"></input>
                 <br>
                 <label for="bit_rate">Bit Rate:</label>
@@ -35,15 +38,28 @@
             <select id="av_resolutions">
                 <option>Auto</option>
             </select><br>
-            <button id="force_res">Force Quality</button>
-            <canvas id="myChart"></canvas>
+            <button id="force_res" class="forceQualityBtn">Force Quality</button>
+            <canvas id="dataChart"></canvas>
         </div>
 
         
-        
+        <!-- Libraries -->
         <script src="Chart.min.js"></script>
         <script src="dash.all.min.js"></script>
+        
+        <!-- JavaScript -->
+        <script src="sendPut.js"></script>
+        <script src="sliderValSet.js"></script>
+        <script src="onPlay.js"></script>
+        <script src="onPause.js"></script>
+        <script src="onStart.js"></script>
+        <script src="clearSelect.js"></script>
+        <script src="initVideo.js"></script>
+        <script src="startTracking.js"></script>
+        <script src="qualitySelect.js"></script>
         <script src="main.js"></script>
+        
+
         <footer class="footer"><p class="footerp">Adam Pratley - University of Plymouth</p></footer>
     </body>
 </html>

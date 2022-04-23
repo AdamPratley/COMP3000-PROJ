@@ -40,7 +40,11 @@ video {
     max-width: 720px;
 }
 
-#myChart{
+.forceQualityBtn {
+    margin: 5px;
+}
+
+#dataChart{
     width:100%;
     max-width:720px;
     margin-bottom: 25px;

@@ -3,13 +3,11 @@ const app = express();
 const port = 8080;
 
 app.use(express.static('libs'));
+app.use(express.static('src'));
+app.use(express.static('videos'));
 
 app.get('/', function (req, res) {
     res.sendFile('index.html', {root: __dirname});
-});
-
-app.get('/main.js', function (req, res) {
-    res.sendFile('main.js', {root: __dirname});
 });
 
 app.get('/favicon.ico', function (req, res) {
