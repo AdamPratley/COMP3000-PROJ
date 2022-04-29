@@ -13,7 +13,6 @@ brslider.value = 50;
 
 let xValues = [];
 let greenY = [];
-let blueY = [];
 let redY = [];
 
 var dataChart = {
@@ -40,12 +39,11 @@ var player = {
 }
 test('test Tracking', function(){
 
-    tracking(player,cur_br,cur_res,brslider,xValues,greenY,blueY,redY,dataChart);
+    tracking(player,cur_br,cur_res,brslider,xValues,greenY,redY,dataChart);
     
 
     expect(xValues[0]).toEqual(1);
     expect(greenY[0]).toEqual(200);
-    expect(blueY[0]).toEqual(180);
     expect(redY[0]).toEqual(5000);
 
     expect(cur_br.innerHTML).toEqual("Current Video Bitrate: 200 kbps");

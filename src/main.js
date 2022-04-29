@@ -25,7 +25,6 @@ let settingsp = player.getSettings();
 
 var xValues = [];
 var greenY = [];
-var blueY = [];
 var redY = [];
 
 var dataChart = new Chart("dataChart", {
@@ -37,11 +36,6 @@ var dataChart = new Chart("dataChart", {
         borderColor: "green",
         fill: false,
         label: "Video Bit Rate (Kbps)"
-      }, { 
-        data: blueY,
-        borderColor: "blue",
-        fill: false,
-        label: "Resolution (Height in Pixels)"
       }, { 
         data: redY,
         borderColor: "red",
@@ -96,7 +90,7 @@ player.on("playbackPaused", function(){
 player.on("playbackPlaying", function(){
   if (!statsInterval){
     statsInterval = setInterval(function() {
-      tracking(player,cur_br,cur_res,brslider,xValues,greenY,blueY,redY,dataChart);
+      tracking(player,cur_br,cur_res,brslider,xValues,greenY,redY,dataChart);
     },1000);
   }
 });
