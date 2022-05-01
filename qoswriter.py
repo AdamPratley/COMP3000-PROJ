@@ -1,5 +1,6 @@
 import sys
 import os, platform
+
 def err():
     print("Proper Usage:\nqoswriter.py Int Int\nInts = Start, End in Kpbs")
     exit()
