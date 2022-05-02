@@ -1,4 +1,4 @@
-function tracking(player,cur_br,cur_res,brslider,xValues,greenY,redY,dataChart){
+function tracking(config,player,cur_br,cur_res,brslider,xValues,greenY,redY,dataChart){
         var currentQualityIndex = player.getQualityFor('video');
         
         var currentQualityObject = player.getBitrateInfoListFor('video')[currentQualityIndex];
@@ -13,7 +13,7 @@ function tracking(player,cur_br,cur_res,brslider,xValues,greenY,redY,dataChart){
 
         xValues.push(parseInt(player.time()));
         greenY.push(curBitrate);
-        redY.push(brslider.value * 100);
+        redY.push(config.min +((brslider.value - 1) * config.step));
 
         dataChart.update();
 }

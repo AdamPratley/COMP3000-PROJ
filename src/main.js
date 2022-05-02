@@ -94,7 +94,7 @@ player.on("playbackPaused", function(){
 player.on("playbackPlaying", function(){
   if (!statsInterval){
     statsInterval = setInterval(function() {
-      tracking(player,cur_br,cur_res,brslider,xValues,greenY,redY,dataChart);
+      tracking(config,player,cur_br,cur_res,brslider,xValues,greenY,redY,dataChart);
     },1000);
   }
 });

@@ -10,7 +10,7 @@ cur_br = document.getElementById("cur_bitrate");
 cur_res = document.getElementById("cur_resolution");
 
 brslider.value = 50;
-
+let config = {"min": 100,"max": 10000,"step": 100}
 let xValues = [];
 let greenY = [];
 let redY = [];
@@ -39,7 +39,7 @@ var player = {
 }
 test('test Tracking', function(){
 
-    tracking(player,cur_br,cur_res,brslider,xValues,greenY,redY,dataChart);
+    tracking(config,player,cur_br,cur_res,brslider,xValues,greenY,redY,dataChart);
     
 
     expect(xValues[0]).toEqual(1);
