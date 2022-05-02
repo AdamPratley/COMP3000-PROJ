@@ -10,8 +10,12 @@ forceQuality = document.getElementById("force_res");
 select = document.getElementById("av_resolutions");
 videoplayer = document.querySelector("#videoPlayer");
 
+var config = {};
+getConfig();
+
 var vid_url = adrInput.value;
 var odlAddr = odlInput.value;
+
 adrInput.addEventListener('change', () => {
   vid_url = adrInput.value;
 })
