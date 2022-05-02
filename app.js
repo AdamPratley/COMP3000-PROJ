@@ -18,6 +18,10 @@ app.get('/style.css', function (req, res) {
     res.sendFile('style.css', {root: __dirname});
 });
 
+app.get('/config', function (req, res) {
+    res.sendFile('config.json', {root: __dirname});
+});
+
 app.listen(port, () => {
     console.log(`Now listening on port ${port}`);
 }); 
