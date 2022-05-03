@@ -1,58 +1,100 @@
-import sys
-import os, platform
+import sys, json, os, platform
 
-def err():
-    print("Proper Usage:\nqoswriter.py Int Int\nInts = Start, End in Kpbs")
-    exit()
+def writeConfig(Min,Max,step):
+    try:    
+        with open('config.json','x') as f:
+            print('File Created')
+            f.close()
+    except:
+        print("File Exists...")
+        
+    with open('config.json', 'r+') as f:
+        
+        content = f.read()
+        
+        if content == "":
+            print('Writing Config...')
+            
+            content = {
+                "min": Min,
+                "max": Max,
+                "step": step,
+                }
+            
+            json.dump(content, f)
+            f.close()
+        else:
+            print('Overwriting Config...')
+            
+            content = json.loads(content)
+            
+            content["min"] = Min
+            content["max"] = Max
+            content["step"] = step
+            
+            f.seek(0)
+            json.dump(content, f)
+            f.truncate()
+            f.close()
+            
+    print("Done.")
     
-def makequeue(i,rate):    
+def makeQueue(i,rate):    
     return (" -- --id=@q"+str(i)+" create queue other-config:min-rate="+str(rate)+" other-config:max-rate="+str(rate))
 
-def writer(start,end):
+def writeQos(start,end):
     try:
         start = int(start)
         end = int(end)
-    except:
-        err()
+    except ValueError:
+        raise Exception("Args must be int") 
 
     if start > end:
-        err()
-        
-    start *= 1000
-    end *= 1000
-    
-    step = (end - start) / 99
+        raise Exception("Arg2 must be greater than Arg1")
 
-    strt = "sudo ovs-vsctl set port s1-eth1 qos=@newqos -- --id=@newqos create qos type=linux-htb other-config:max-rate=" + str(end) + " "
+    
+    startKbps = start * 1000
+    endKbps = end * 1000
+    
+    stepKbps = (endKbps - startKbps) / 99
+
+    strt = "sudo ovs-vsctl set port s1-eth1 qos=@newqos -- --id=@newqos create qos type=linux-htb other-config:max-rate=" + str(endKbps) + " "
     ques = "queues="
-    queueconf = ""
+    queueConf = ""
     
     for i in range(1,101):
         if i == 100:
             ques += str(i)+"=@q"+str(i)
         else:
             ques += str(i)+"=@q"+str(i)+","
-        queueconf += makequeue(i,int(start))
-        start+= step
+        queueConf += makeQueue(i,int(startKbps))
+        startKbps+= stepKbps
 
-    final = strt + ques + queueconf
-    with open('qos100.txt', 'w+') as f:
+    final = strt + ques + queueConf
+    
+    with open('qos100.txt', 'w') as f:
         f.write("sudo ovs-vsctl --all destroy qos\n")
         f.write("sudo ovs-vsctl --all destroy queue\n")
         f.write(final)
         f.close()
 
+    writeConfig(start,end,int(stepKbps/1000))
+
 if __name__ == "__main__":
     try:
-        writer(sys.argv[1],sys.argv[2])
-        if platform.system() == "Windows":
-            print("*Cannot add permissions in windows*")
-            print(os.popen("rename qos100.txt qos100.sh").read())
-        elif os.system == "Linux":
-            print(os.popen("mv qos100.txt qos100.sh").read())
-            print(os.popen("chmod +x qos100.sh").read())
-        else:
-            print("System must be Linux or Windows")
-            
+        writeQos(sys.argv[1],sys.argv[2])
     except:
-        err()
+        raise Exception("Proper Usage:\nqoswriter.py Int Int\nInts = Start, End in Kpbs")
+    
+    if platform.system() == "Windows":
+        print("*Cannot add permissions in windows*")
+        print(os.popen("rename qos100.txt qos100.sh").read())
+        
+    elif platform.system() == "Linux":
+        print(os.popen("mv qos100.txt qos100.sh").read())
+        print(os.popen("chmod +x qos100.sh").read())
+        
+    else:
+        print("System must be Linux or Windows")
+            
+    
