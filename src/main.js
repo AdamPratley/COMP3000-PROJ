@@ -30,46 +30,9 @@ let settingsp = player.getSettings();
 var xValues = [];
 var greenY = [];
 var redY = [];
+var dataChart = null;
 
-var dataChart = new Chart("dataChart", {
-    type: "line",
-    data: {
-      labels: xValues,
-      datasets: [{ 
-        data: greenY,
-        borderColor: "green",
-        fill: false,
-        label: "Video Bit Rate (Kbps)"
-      }, { 
-        data: redY,
-        borderColor: "red",
-        fill: false,
-        label: "Connection Bit Rate (Kbps)"
-      }]
-    },
-    options: {
-      legend: {display: true},
-      scales:{
-        xAxes: [{
-            display: true,
-            scaleLabel: {
-                display: true,
-                labelString: 'Time (Seconds)'
-            },
-            ticks: {
-                display: false 
-            }
-        }],
-        yAxes: [{
-            display: true, 
-            scaleLabel: {
-                display: true,
-                labelString: 'Bit Rate (Kbps)'
-            }
-        }]
-    }
-    }
-}); 
+
 
 //Event Listeners
 brslider.addEventListener('change', () => {
@@ -78,8 +41,10 @@ brslider.addEventListener('change', () => {
 });
 
 loadbtn.addEventListener('click', function (){
+  clearChart(dataChart);
   clearSelect(select);
   initVideo(player,videoplayer,vid_url);
+  dataChart = initChart(xValues,greenY,redY);
 });
 
 player.on("streamInitialized", function(){
