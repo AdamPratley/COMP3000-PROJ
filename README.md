@@ -43,6 +43,14 @@ The Create the database with...
 mysql> CREATE DATABASE main;
 mysql> CREATE TABLE sessions (id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, link VARCHAR(255) NOT NULL, xValues JSON NOT NULL, redY JSON NOT NULL, greenY JSON NOT NULL);
 ~~~
+Ensure sql server has stopped before starting SDN
+~~~
+~$ sudo systemctl stop mysql
+~~~
+start sql server in h2
+~~~
+~$ sudo systemctl start mysql
+~~~
 Starting Mininet Network with 2 Hosts (Replace x's with IP of OpenDayLight VM)
 ~~~
 ~$ sudo mn -x --mac --nat --topo single,2 --controller=remote,ip=192.168.xx.xx,port=6633
@@ -52,7 +60,7 @@ When Exiting Mininet do;
 mininet> exit
 ~$ sudo mn -c
 ~~~
-###QoS Policies
+### QoS Policies
 Run the qos100.sh script in the switch 's1'
 ~~~
 ~$ python3 qoswriter.py min max
@@ -61,7 +69,7 @@ Run the qos100.sh script in the switch 's1'
 ~~~
 The qos100.sh script will automatically clean up old QoS Policies on execution, this must be executed on start.
 
-###OpenDayLight
+### OpenDayLight
 An Ubuntu Server VM with OpenDayLight; <br />
 https://ubuntu.com/download/server <br />
 https://docs.opendaylight.org/en/stable-phosphorus/downloads.html <br />
@@ -70,10 +78,24 @@ OpenDaylight should be ran with; <br />
 ~$ cd odl/bin
 ~$ ./karaf
 ~~~
-###MobaXterm
+### MobaXterm
 MobaXterm available here; <br />
 https://mobaxterm.mobatek.net/download.html <br />
 Set X11 remote access to 'Full'  <br />
 Settings > Configuration > X11 > X11 remote access
 
+### Nodejs and npm
+install nodejs and npm with
+~~~
+~$ sudo apt-get nodejs
+~$ sudo apt-get npm
+~~~
+run npm in the same directory with package.json to install depedancies
+~~~
+~$ npm install
+~~~
+Starting node project in h2
+~~~
+~$ nodejs app.js
+~~~
 If for whatever reason you choose to use a different version than recommended then I cannot guarantee an absence of version clashes or at least frontend or setup discrepancies.
