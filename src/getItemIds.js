@@ -4,4 +4,4 @@ function getItemIds(){
     .then(res=>{buildOptions(res)});
 }
 
-module.exports = getItemIds();
+module.exports = getItemIds;
