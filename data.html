@@ -3,7 +3,7 @@
         <link rel="stylesheet" href="style.css">
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Video Stream Tester</title>
+        <title>Video Stream Data</title>
     </head>
     <body>
         <div id="navbar" class="topnav">
@@ -14,6 +14,7 @@
             <a href="/">Video Tester</a><br>
             <select id="sessionSelect"></select>
             <button id="loadBtn">Load Info</button>
+            <button id="delBtn">Delete Info</button>
 
             <p id="text"></p>
             <canvas id="dataChart"></canvas>
@@ -25,7 +26,9 @@
         <!--Supressing error (jest)-->
         <script>var module = {exports:""};</script>
 
+        <!-- JS Functions-->
         <script src="buildInfo.js"></script>
+        <script src="delById.js"></script>
         <script src="getItemById.js"></script>
         <script src="addOption.js"></script>
         <script src="buildOptions.js"></script>

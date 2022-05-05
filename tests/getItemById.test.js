@@ -21,7 +21,8 @@ window.para = {
 };
 const mockBuildInfo = jest.fn();
 window.buildInfo = mockBuildInfo;
-test('',function(){
+
+test('getItemById', function(){
     getItemById();
 
     expect(mockFetch.mock.calls.length).toBe(1);

@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
-var bodyParser = require('body-parser')
-var mysql = require('mysql');
+const bodyParser = require('body-parser')
+const mysql = require('mysql');
+const nocache = require('nocache');
+
 const port = 8080;
 
 var jsonParser = bodyParser.json()
@@ -21,6 +23,7 @@ con.connect(function(err) {
 app.use(express.static('libs'));
 app.use(express.static('src'));
 app.use(express.static('videos'));
+app.use(nocache());
 
 app.get('/', function (req, res) {
     res.sendFile('index.html', {root: __dirname});
@@ -65,6 +68,13 @@ app.get('/api/v1/getbyid/:id',(req,res) =>{
         res.send(result);
     });
 });
+
+app.get('/api/v1/delbyid/:id',(req,res) =>{
+    con.query(("DELETE FROM sessions WHERE id ="+req.params.id), function(err,result){
+        if (err) throw err;
+        res.send(result);
+    });
+})
 
 app.listen(port, () => {
     console.log(`Now listening on port ${port}`);
