@@ -98,4 +98,4 @@ Starting node project in h2
 ~~~
 ~$ nodejs app.js
 ~~~
-If for whatever reason you choose to use a different version than recommended then I cannot guarantee an absence of version clashes or at least frontend or setup discrepancies.
+If for whatever reason you choose to use a different version than recommended then I cannot guarantee an absence of version clashes or at least frontend visual or setup discrepancies.
