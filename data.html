@@ -1,0 +1,38 @@
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Video Stream Tester</title>
+    </head>
+    <body>
+        <div id="navbar" class="topnav">
+            <h1 class="Header">Video Stream Data</h1>
+        </div>
+
+        <div class="content">
+            <a href="/">Video Tester</a><br>
+            <select id="sessionSelect"></select>
+            <button id="loadBtn">Load Info</button>
+
+            <p id="text"></p>
+            <canvas id="dataChart"></canvas>
+        </div>
+    
+        <!-- Libraries -->
+        <script src="Chart.min.js"></script>
+
+        <!--Supressing error (jest)-->
+        <script>var module = {exports:""};</script>
+
+        <script src="buildInfo.js"></script>
+        <script src="getItemById.js"></script>
+        <script src="addOption.js"></script>
+        <script src="buildOptions.js"></script>
+        <script src="getItemIds.js"></script>
+        <script src="initChart.js"></script>
+        <script src="data.js"></script>
+
+        <footer class="footer"><p class="footerp">Adam Pratley - University of Plymouth</p></footer>
+    </body>
+</html>

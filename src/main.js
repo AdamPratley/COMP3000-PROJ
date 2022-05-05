@@ -9,6 +9,7 @@ odlInput = document.getElementById("odl_input");
 forceQuality = document.getElementById("force_res");
 select = document.getElementById("av_resolutions");
 videoplayer = document.querySelector("#videoPlayer");
+uploadBtn = document.getElementById("sendData");
 
 var config = {};
 getConfig();
@@ -66,4 +67,12 @@ player.on("playbackPlaying", function(){
 
 forceQuality.addEventListener('click', function(){
   qualitySelect(player,settingsp,select,bitrates);
+});
+
+uploadBtn.addEventListener('click', function(){
+  sendData({
+    link: vid_url,
+    xValues: xValues,
+    greenY: greenY,
+    redY: redY});
 });

@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/AdamPratley/COMP3000-PROJ#readme",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.17.3",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "mysql": "^2.18.1"
   }
 }
