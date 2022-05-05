@@ -4,7 +4,7 @@
   "description": "A Web Based Platform to Evaluate Video Streaming Over a Software Defined Network",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",

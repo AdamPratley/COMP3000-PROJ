@@ -4,7 +4,7 @@ function clearChart(dataChart){
         xValues = [];
         greenY = [];
         redY = [];
-      }
+    };
 }
 
 module.exports = clearChart;

@@ -9,6 +9,8 @@ function sliderValSet(brword,val){
         brword.innerHTML = "Low " + "("+val+"%)";
     } else if (val <= 24 && val >=0){
         brword.innerHTML = "Very Low " + "("+val+"%)";
+    } else{
+        brword.innerHTML = "Error";
     }
 }
 
