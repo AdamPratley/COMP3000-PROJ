@@ -3,38 +3,45 @@ This Project spanned an academic year exploring technologies such as Mininet for
 
 
 # Requirements and Setup
-A Hypervisor suchas;<br />
+VMware Workstation Player;<br />
 https://www.vmware.com/uk/products/workstation-player/workstation-player-evaluation.html
 
-The Latest Mininet VM (20.04) and browser of your choice; <br />
+Mininet VM (16.04); <br />
 https://github.com/mininet/mininet/releases/ <br />
-Latest Version (100) of Google Chrome; <br />
+Google Chrome (Latest); <br />
 https://www.google.com/chrome/?platform=linux <br />
-Or an older version (68) of Firefox (Not Reccomended); <br />
-https://ftp.mozilla.org/pub/firefox/releases/ <br />
-(Latest Version of Firefox is too slow over xterm)
 
-### Enabling X11 in Mininet VM (20.04) 
-~~~
-~$ sudo vi /etc/ssh/sshd_config
-~~~
-Remove the # for X11Forwarding, X11DisplayOffset and X11UseLocalhost <br />
-Then Save with Esc then :wq <br />
-~~~
-~$ sudo vi /etc/ssh/ssh_config
-~~~
-Find 'ForwardX11' <br />
-Remove the '#' <br />
-Finally replace 'no' with 'yes' <br />
 
-### Set $DISPLAY Environment Variable 
-If the following command returns empty
+### Install X11 in Mininet VM 
 ~~~
-~$ echo $DISPLAY
+~$ sudo apt-get install xorg
 ~~~
-Then enter this
+
+### Install MySql in Mininet VM
 ~~~
-~$ export DISPLAY=localhost:10.0
+~$ sudo apt-get install mysql
+~~~
+use the password 'admin' for simplicity<br>
+Change bind-address from 127.0.0.1 to 0.0.0.0
+~~~
+~$ sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+~~~
+Then restart mysql
+~~~
+~$ sudo systemctl restart mysql
+~~~
+Login with
+~~~
+~$ mysql -u root -p
+~~~
+Enter this to allow login
+~~~
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin';
+~~~
+The Create the database with...
+~~~
+mysql> CREATE DATABASE main;
+mysql> CREATE TABLE sessions (id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, link VARCHAR(255) NOT NULL, xValues JSON NOT NULL, redY JSON NOT NULL, greenY JSON NOT NULL);
 ~~~
 Starting Mininet Network with 2 Hosts (Replace x's with IP of OpenDayLight VM)
 ~~~
@@ -48,11 +55,13 @@ mininet> exit
 ###QoS Policies
 Run the qos100.sh script in the switch 's1'
 ~~~
+~$ python3 qoswriter.py min max
 ~$ chmod +x qos100.sh
 ~$ ./qos100.sh
 ~~~
 The qos100.sh script will automatically clean up old QoS Policies on execution, this must be executed on start.
 
+###OpenDayLight
 An Ubuntu Server VM with OpenDayLight; <br />
 https://ubuntu.com/download/server <br />
 https://docs.opendaylight.org/en/stable-phosphorus/downloads.html <br />
@@ -61,6 +70,7 @@ OpenDaylight should be ran with; <br />
 ~$ cd odl/bin
 ~$ ./karaf
 ~~~
+###MobaXterm
 MobaXterm available here; <br />
 https://mobaxterm.mobatek.net/download.html <br />
 Set X11 remote access to 'Full'  <br />
