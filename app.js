@@ -12,7 +12,8 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "admin",
-    database: "main"  
+    database: "main",
+    socketPath: "/var/run/mysqld/mysqld.sock"  
 });
 
 con.connect(function(err) {
