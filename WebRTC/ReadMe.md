@@ -1,0 +1,1 @@
+Much of this code is from the examples found in https://github.com/aiortc/aiortc/tree/main/examples/server <br /> unfortunately there were compatability issues with Linux so this functionality had to be abandoned
