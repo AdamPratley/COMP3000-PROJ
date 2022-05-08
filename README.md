@@ -2,7 +2,7 @@
 This Project spanned an academic year exploring technologies such as Mininet for Software Defined Networking, DASHjs for Dynamic Adaptive Streaming over HTTP, with a look into WebRTC (Web Real-Time Communication) for live webcam streaming and OpenDayLight as a REST API for controlling Software Defined Networks programmatically.
 
 
-# Requirements and Setup
+# Requirements and Setup/ User Guide
 VMware Workstation Player;<br />
 https://www.vmware.com/uk/products/workstation-player/workstation-player-evaluation.html
 
@@ -10,31 +10,25 @@ Mininet VM (16.04); <br />
 https://github.com/mininet/mininet/releases/ <br />
 Google Chrome (Latest); <br />
 https://www.google.com/chrome/?platform=linux <br />
-
-
+~~~
+~$ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+~$ sudo dpkg -i google-chrome-stable_current_amd64.deb
+~$ sudo apt-get install -f
+~~~
 ### Install X11 in Mininet VM 
 ~~~
 ~$ sudo apt-get install xorg
 ~~~
-
-### Install MySql in Mininet VM
+### Install MySQL in Mininet VM
 ~~~
 ~$ sudo apt-get install mysql
 ~~~
 use the password 'admin' for simplicity<br>
-Change bind-address from 127.0.0.1 to 0.0.0.0
-~~~
-~$ sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
-~~~
-Then restart mysql
-~~~
-~$ sudo systemctl restart mysql
-~~~
 Login with
 ~~~
 ~$ mysql -u root -p
 ~~~
-Enter this to allow login
+Enter this to allow login by nodejs
 ~~~
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin';
 ~~~
@@ -63,8 +57,7 @@ mininet> exit
 ### QoS Policies
 Run the qos100.sh script in the switch 's1'
 ~~~
-~$ python3 qoswriter.py min max
-~$ chmod +x qos100.sh
+~$ python3 qoswriter.py minBandwidth maxBandwidth
 ~$ ./qos100.sh
 ~~~
 The qos100.sh script will automatically clean up old QoS Policies on execution, this must be executed on start.
@@ -87,8 +80,8 @@ Settings > Configuration > X11 > X11 remote access
 ### Nodejs and npm
 install nodejs and npm with
 ~~~
-~$ sudo apt-get nodejs
-~$ sudo apt-get npm
+~$ sudo apt-get install nodejs
+~$ sudo apt-get install npm
 ~~~
 run npm in the same directory with package.json to install depedancies
 ~~~
@@ -98,4 +91,9 @@ Starting node project in h2
 ~~~
 ~$ nodejs app.js
 ~~~
+Start Google Chrome from h1 navigate to 10.0.0.2:8080
+~~~
+~$ google-chrome
+~~~
+
 If for whatever reason you choose to use a different version than recommended then I cannot guarantee an absence of version clashes or at least frontend visual or setup discrepancies.
