@@ -8,6 +8,7 @@ https://www.vmware.com/uk/products/workstation-player/workstation-player-evaluat
 
 Mininet VM (16.04); <br />
 https://github.com/mininet/mininet/releases/ <br />
+Mininet VM must have 2 Bridged network adapters < br/>
 Google Chrome (Latest); <br />
 https://www.google.com/chrome/?platform=linux <br />
 ~~~
