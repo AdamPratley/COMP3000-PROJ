@@ -1,5 +1,5 @@
 # A Web Based Platform to Evaluate Video Streaming Over a Software Defined Network
-This Project spanned an academic year exploring technologies such as Mininet for Software Defined Networking, DASHjs for Dynamic Adaptive Streaming over HTTP, with a look into WebRTC (Web Real-Time Communication) for live webcam streaming and OpenDayLight as a REST API for controlling Software Defined Networks programmatically.
+This Project spanned an academic year exploring technologies such as Mininet for Software Defined Networking, DASHjs for Dynamic Adaptive Streaming over HTTP, with a look into WebRTC (Web Real-Time Communication) for live webcam streaming and using the OpenDayLight REST API to Open VSwitch queues programmatically.
 
 
 # Requirements and Setup/ User Guide
