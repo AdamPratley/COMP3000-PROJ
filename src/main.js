@@ -45,7 +45,7 @@ loadbtn.addEventListener('click', function (){
   clearChart(dataChart);
   clearSelect(select);
   initVideo(player,videoplayer,vid_url);
-  dataChart = initChart(xValues,greenY,redY);
+  dataChart = initChart(xValues,redY,greenY);
 });
 
 player.on("streamInitialized", function(){
